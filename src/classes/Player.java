@@ -1,12 +1,11 @@
 package assignment1;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Player {
 	private String full_name;
-	private Date birth;
-	private Date registration;
+	private LocalDate birth;
+	private LocalDate registration;
 	private String email;
 	
 	// METHODS
@@ -15,7 +14,14 @@ public class Player {
 		
 	}
 	
-	public Player(String full_name, Date birth, Date registration, String email) {
+	/**
+	 * Parameterized constructor
+	 * @param full_name Full_name of the user
+	 * @param birth
+	 * @param registration
+	 * @param email
+	 */
+	public Player(String full_name, LocalDate birth, LocalDate registration, String email) {
 		this.full_name = full_name;
 		this.birth = birth;
 		this.registration = registration;
@@ -26,11 +32,11 @@ public class Player {
 		return this.full_name;
 	}
 	
-	public Date getBirth() {
+	public LocalDate getBirth() {
 		return this.birth;
 	}
 	
-	public Date getRegistration() {
+	public LocalDate getRegistration() {
 		return this.registration;
 	}
 	
@@ -42,11 +48,11 @@ public class Player {
 		this.full_name = name;
 	}
 	
-	public void setBirth(Date birth) {
+	public void setBirth(LocalDate birth) {
 		this.birth = birth;
 	}
 	
-	public void setRegistration(Date registration) {
+	public void setRegistration(LocalDate registration) {
 		this.registration = registration;
 	}
 	
@@ -66,21 +72,17 @@ public class Player {
 	}
 	
 	public int calculateSeniority() { // IT DOESN'T WORK
-		long aux;
 		int seniority;
-		Date now = new Date();
-		aux = now.getTime() - this.registration.getTime();
-		aux = aux/1000000; // MILISEGUNDOS A SEGUNDOS
-		aux = aux/86400; // SEGUNDOS EN UN DIA
-		seniority = (int)aux/365; // DIAS EN UN AÑO
+		LocalDate ahora= LocalDate.now();
+		this.registration.getYear();
+		seniority = ahora.getYear() - this.registration.getYear();
 		return seniority;
 	}
 	
 	
-	
 	public static void main(String[] args) {
 		// HOW TO SET A DATE, ALL METHODS ARE DEPRECATED, DO WE USE CALENDAR??
-		Player jugador = new Player("Antonio", new Date(104, 12, 10), new Date(121, 10, 23), "asdocvan@ivas.com");
+		Player jugador = new Player("Antonio", LocalDate.of(2004, 11, 20), LocalDate.of(2021, 2, 28), "asdocvan@ivas.com");
 		String info = jugador.toString();
 		int seniority = jugador.calculateSeniority();
 
