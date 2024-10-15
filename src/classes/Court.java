@@ -117,17 +117,56 @@ public class Court {
 		
 		return availableMat;
 	}
-	
-	public void associateMaterialToTrack(Material new_mat) {
-		
+	public boolean associateMaterialToCourt(Material new_mat) {
+		int num=0;
 		if(!(new_mat.getUsage()==false && new_mat.getUsage()!=this.type)){
-			this.materials.add(new_mat);
+			// IF IT IS A BALL
+			if(new_mat.getType()==MaterialType.BALL)
+			{ 
+				for(int i=0; i<this.materials.size(); i++) {
+					if(this.materials.get(i).getType()==MaterialType.BALL)
+					{
+						num++;
+					}
+				}
+				if(num<12) {
+					this.materials.add(new_mat);
+					return true;
+				}
+			}
+			
+			// IF IT IS A CONE
+			else if(new_mat.getType()==MaterialType.CONE)
+			{ 
+				for(int i=0; i<this.materials.size(); i++) {
+					if(this.materials.get(i).getType()==MaterialType.CONE)
+					{
+						num++;
+					}
+				}
+				if(num<20) {
+					this.materials.add(new_mat);
+					return true;
+				}
+			}
+			
+			// IF IT IS A BASKET
+			else if(new_mat.getType()==MaterialType.BASKET)
+			{ 
+				for(int i=0; i<this.materials.size(); i++) {
+					if(this.materials.get(i).getType()==MaterialType.BASKET)
+					{
+						num++;
+					}
+				}
+				if(num<2) {
+					this.materials.add(new_mat);
+					return true;
+				}
+			}
 		}
-		if(new_mat.getType()==MaterialType.BALL)
-		{ // ????????????????????????????????????
-		}
+		return false;
 	}
-	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
