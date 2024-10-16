@@ -1,5 +1,6 @@
-package assignment1;
+package classes;
 import java.util.ArrayList;
+import enums.*;
 
 public class Court {
 	private static String name = null; // I DON'T GET THE NAME (HOW DO WE DO A SINGLETON?)
@@ -175,7 +176,7 @@ public class Court {
 		MaterialType aux2 = MaterialType.BALL;
 		MaterialStatus aux3 = MaterialStatus.AVAILABLE;
 		Material aux1 = new Material(10, aux2, true, aux3);
-		c.associateMaterialToTrack(aux1);
+		c.associateMaterialToCourt(aux1);
 		info = c.toString();
 		System.out.println(info);
 	}

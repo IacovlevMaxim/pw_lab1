@@ -1,7 +1,7 @@
 package manager;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import classes.Player;
 
@@ -56,15 +56,14 @@ public class UserManager
 		
 	}
 	
-	public void modifyUser(Player user, String newName, String newSurname, Date newBirhDate, String newEmail)
+	public void modifyUser(Player user, String newName, String newSurname, LocalDate newBirhDate, String newEmail)
 	{
 		
 		System.out.println("Modify name and surname");
 		user.setName(newName);
-		user.setSurname(newSurname);
 		
 		System.out.println("Modify birth date");
-		user.setBirthDate(newBirhDate);
+		user.setBirth(newBirhDate);
 		
 		System.out.println("Modify email");
 		user.setEmail(newEmail);
@@ -78,9 +77,8 @@ public class UserManager
 		{
 			
 			user.getName();
-			user.getSurname();
-			user.getBirthDate();
-			user.getFirstReservation();
+			user.getBirth();
+			user.getReservation();
 			user.getEmail();
 			
 		}

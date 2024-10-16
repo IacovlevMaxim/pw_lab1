@@ -1,4 +1,4 @@
-package assignment1;
+package enums;
 
 public enum CourtSize {
 	MINIBASKET,

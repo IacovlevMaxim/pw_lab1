@@ -39,7 +39,7 @@ public class Material {
         return _type;
     }
 
-    public boolean isUsage() {
+    public boolean getUsage() {
         return _usage;
     }
 
