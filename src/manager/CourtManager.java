@@ -1,7 +1,6 @@
-package assignment1.managers;
+package manager;
 
 import java.util.ArrayList;
-
 import classes.Court;
 import enums.CourtSize;
 import classes.Material;
