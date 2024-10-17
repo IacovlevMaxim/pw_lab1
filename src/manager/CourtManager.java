@@ -2,11 +2,11 @@ package assignment1.managers;
 
 import java.util.ArrayList;
 
-import assignment1.Court;
-import assignment1.CourtSize;
-import assignment1.Material;
-import assignment1.MaterialStatus;
-import assignment1.MaterialType;
+import classes.Court;
+import enums.CourtSize;
+import classes.Material;
+import enums.MaterialStatus;
+import enums.MaterialType;
 
 public class courtManager {
 
