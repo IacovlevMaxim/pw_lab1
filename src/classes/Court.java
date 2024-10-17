@@ -117,52 +117,9 @@ public class Court {
 		return availableMat;
 	}
 	public boolean associateMaterialToCourt(Material new_mat) {
-		int num=0;
 		if(!(new_mat.getUsage()==false && new_mat.getUsage()!=this.type)){
-			// IF IT IS A BALL
-			if(new_mat.getType()==MaterialType.BALL)
-			{ 
-				for(int i=0; i<this.materials.size(); i++) {
-					if(this.materials.get(i).getType()==MaterialType.BALL)
-					{
-						num++;
-					}
-				}
-				if(num<12) {
-					this.materials.add(new_mat);
-					return true;
-				}
-			}
-			
-			// IF IT IS A CONE
-			else if(new_mat.getType()==MaterialType.CONE)
-			{ 
-				for(int i=0; i<this.materials.size(); i++) {
-					if(this.materials.get(i).getType()==MaterialType.CONE)
-					{
-						num++;
-					}
-				}
-				if(num<20) {
-					this.materials.add(new_mat);
-					return true;
-				}
-			}
-			
-			// IF IT IS A BASKET
-			else if(new_mat.getType()==MaterialType.BASKET)
-			{ 
-				for(int i=0; i<this.materials.size(); i++) {
-					if(this.materials.get(i).getType()==MaterialType.BASKET)
-					{
-						num++;
-					}
-				}
-				if(num<2) {
-					this.materials.add(new_mat);
-					return true;
-				}
-			}
+			this.materials.add(new_mat);
+			return true;
 		}
 		return false;
 	}
