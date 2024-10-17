@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import enums.*;
 
 public class Court {
-	private static String name = null; // I DON'T GET THE NAME (HOW DO WE DO A SINGLETON?)
+	private String name; 
 	private boolean status;
 	private boolean type;
 	private CourtSize size;
@@ -25,7 +25,7 @@ public class Court {
 		materials = new ArrayList<Material>();
 	}
 	
-	public String getName() { // NOT SURE ABOUT THIS ONE
+	public String getName() { 
 		return name;
 	}
 	
@@ -49,10 +49,8 @@ public class Court {
 		return this.materials;
 	}
 	
-	public void setName(String new_name) {
-		if(name == null) {
-			name = new String(new_name);
-		}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setStatus(boolean status) {
