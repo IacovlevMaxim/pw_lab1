@@ -70,18 +70,23 @@ public class UserManager
 		
 	}
 	
-	public void listUsers()
+	public ArrayList<Player> listUsers()
 	{
+		
+		ArrayList<Player> regUsers = new ArrayList<Player>();
 		
 		for(Player user : users)
 		{
-			
-			user.getName();
-			user.getBirth();
-			user.getReservation();
-			user.getEmail();
+			if(isRegistered(user.getEmail()))
+			{
+				
+				regUsers.add(user);
+				
+			}
 			
 		}
+		
+		return regUsers;
 		
 	}
 	
