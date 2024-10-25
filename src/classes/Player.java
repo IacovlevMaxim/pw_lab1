@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Player {
 	private String full_name;
 	private LocalDate birth;
-	private LocalDate reservation;
+	private LocalDate registration;
 	private String email;
 	
 	// METHODS
@@ -21,10 +21,10 @@ public class Player {
 	 * @param reservation
 	 * @param email
 	 */
-	public Player(String full_name, LocalDate birth, LocalDate reservation, String email) {
+	public Player(String full_name, LocalDate birth, LocalDate registration, String email) {
 		this.full_name = full_name;
 		this.birth = birth;
-		this.reservation = reservation;
+		this.registration = registration;
 		this.email = email;
 	}
 	
@@ -36,8 +36,8 @@ public class Player {
 		return this.birth;
 	}
 	
-	public LocalDate getReservation() {
-		return this.reservation;
+	public LocalDate getRegistration() {
+		return this.registration;
 	}
 	
 	public String getEmail() {
@@ -52,8 +52,8 @@ public class Player {
 		this.birth = birth;
 	}
 	
-	public void setReservation(LocalDate reservation) {
-		this.reservation = reservation;
+	public void setReservation(LocalDate registration) {
+		this.registration = registration;
 	}
 	
 	public void setEmail(String email) {
@@ -65,7 +65,7 @@ public class Player {
 		String playerInfo;
 		playerInfo = "\nPlayer's name: " + this.full_name;
 		playerInfo += "\nDate of birth: " + this.birth;
-		playerInfo += "\nFirst reservation: " + this.reservation;
+		playerInfo += "\nFirst reservation: " + this.registration;
 		playerInfo += "\nEmail addres: " + this.email;
 		
 		return playerInfo;
@@ -74,9 +74,8 @@ public class Player {
 	public int calculateSeniority() { // IT DOESN'T WORK
 		int seniority;
 		LocalDate ahora= LocalDate.now();
-		this.reservation.getYear();
-		seniority = ahora.getYear() - this.reservation.getYear();
+		this.registration.getYear();
+		seniority = ahora.getYear() - this.registration.getYear();
 		return seniority;
 	}
-	
 }
