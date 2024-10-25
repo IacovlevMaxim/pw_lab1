@@ -124,18 +124,6 @@ public class Court {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String info;
-		Court c = new Court("Hope&Dreams", true, false, CourtSize.ADULTS, 20);
-		MaterialType aux2 = MaterialType.BALL;
-		MaterialStatus aux3 = MaterialStatus.AVAILABLE;
-		Material aux1 = new Material(10, aux2, true, aux3);
-		c.associateMaterialToCourt(aux1);
-		info = c.toString();
-		System.out.println(info);
-	}
-	
 }
 
 
