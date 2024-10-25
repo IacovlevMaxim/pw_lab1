@@ -79,14 +79,4 @@ public class Player {
 		return seniority;
 	}
 	
-	
-	public static void main(String[] args) {
-		// HOW TO SET A DATE, ALL METHODS ARE DEPRECATED, DO WE USE CALENDAR??
-		Player jugador = new Player("Antonio", LocalDate.of(2004, 11, 20), LocalDate.of(2021, 2, 28), "asdocvan@ivas.com");
-		String info = jugador.toString();
-		int seniority = jugador.calculateSeniority();
-
-		System.out.println(info + "\n"); // IF YOU WRITE "\t" IT SHOWS AS A TAB
-		System.out.println(seniority);
-	}
 }
