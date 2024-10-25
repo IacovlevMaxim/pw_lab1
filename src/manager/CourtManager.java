@@ -7,7 +7,7 @@ import classes.Material;
 import enums.MaterialStatus;
 import enums.MaterialType;
 
-public class courtManager {
+public class CourtManager {
 
 		private ArrayList<Court> listOfCourts;
 		private ArrayList<Material> listOfMaterials;
