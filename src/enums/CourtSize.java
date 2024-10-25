@@ -3,5 +3,5 @@ package enums;
 public enum CourtSize {
 	MINIBASKET,
 	ADULTS, 
-	VS3
+	THREE_VS_THREE
 }
