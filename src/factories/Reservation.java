@@ -1,10 +1,10 @@
 package factories;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 abstract public class Reservation {
     private String _userId;
-    private Date _date;
+    private LocalDate _date;
     private int _duration;
     private String _courtId;
     private float _price;
@@ -16,7 +16,7 @@ abstract public class Reservation {
 
     }
 
-    public Reservation(String userId, Date date, int duration, String courtId, float price) {
+    public Reservation(String userId, LocalDate date, int duration, String courtId, float price) {
         _userId = userId;
         _date = date;
         _duration = duration;
@@ -25,7 +25,7 @@ abstract public class Reservation {
         _discount = 0;
     }
 
-    public Reservation(String userId, Date date, int duration, String courtId, float price, float discount) {
+    public Reservation(String userId, LocalDate date, int duration, String courtId, float price, float discount) {
         _userId = userId;
         _date = date;
         _duration = duration;
@@ -52,17 +52,17 @@ abstract public class Reservation {
 
     /**
      * Gets the date of the reservation.
-     * @return The reservation date as a Date object.
+     * @return The reservation date as a LocalDate object.
      */
-    public Date getDate() {
+    public LocalDate getDate() {
         return _date;
     }
 
     /**
      * Sets the date for the reservation.
-     * @param date The reservation date as a Date object.
+     * @param date The reservation date as a LocalDate object.
      */
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         _date = date;
     }
 

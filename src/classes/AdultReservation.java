@@ -2,7 +2,7 @@ package classes;
 
 import factories.Reservation;
 
-import java.util.Date;
+import java.time.LocalDate;
 import enums.*;
 
 public class AdultReservation extends Reservation {
@@ -15,12 +15,12 @@ public class AdultReservation extends Reservation {
         super();
     }
 
-    public AdultReservation(String userId, Date date, int duration, String courtId, float price, int adultNumber) {
+    public AdultReservation(String userId, LocalDate date, int duration, String courtId, float price, int adultNumber) {
         super(userId, date, duration, courtId, price);
         _adultNumber = adultNumber;
     }
 
-    public AdultReservation(String userId, Date date, int duration, String courtId, float price, float discount, int adultNumber) {
+    public AdultReservation(String userId, LocalDate date, int duration, String courtId, float price, float discount, int adultNumber) {
         super(userId, date, duration, courtId, price, discount);
         _adultNumber = adultNumber;
     }

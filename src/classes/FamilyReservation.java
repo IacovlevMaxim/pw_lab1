@@ -3,7 +3,7 @@ package classes;
 import exceptions.NoAdultException;
 import factories.Reservation;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class FamilyReservation extends Reservation {
     private int _childrenNumber;
@@ -14,7 +14,7 @@ public class FamilyReservation extends Reservation {
     }
 
 
-    public FamilyReservation(String userId, Date date, int duration, String courtId, float price, int childrenNumber, int adultNumber) throws NoAdultException {
+    public FamilyReservation(String userId, LocalDate date, int duration, String courtId, float price, int childrenNumber, int adultNumber) throws NoAdultException {
         super(userId, date, duration, courtId, price);
         _childrenNumber = childrenNumber;
         if(adultNumber < 1) {
@@ -24,7 +24,7 @@ public class FamilyReservation extends Reservation {
         _adultNumber = adultNumber;
     }
 
-    public FamilyReservation(String userId, Date date, int duration, String courtId, float price, float discount, int childrenNumber, int adultNumber) throws NoAdultException  {
+    public FamilyReservation(String userId, LocalDate date, int duration, String courtId, float price, float discount, int childrenNumber, int adultNumber) throws NoAdultException  {
         super(userId, date, duration, courtId, price, discount);
         _childrenNumber = childrenNumber;
 

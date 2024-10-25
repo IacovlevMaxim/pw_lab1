@@ -1,8 +1,8 @@
 package factories;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public interface IReservationFactory {
-    Reservation createIndividualReservation(String userId, Date date, int duration, String courtId, float price, float discount);
-    Reservation createPackageReservation(String userId, Date date, int duration, String courtId, float price, float discount, String packageId, int sessionNumber);
+    Reservation createIndividualReservation(String userId, LocalDate date, int duration, String courtId, float price, float discount);
+    Reservation createPackageReservation(String userId, LocalDate date, int duration, String courtId, float price, float discount, String packageId, int sessionNumber);
 }
