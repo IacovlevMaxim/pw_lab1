@@ -36,13 +36,13 @@ public class UserManager
 		
 	}
 	
-	public void register(Player newUser)
+	public boolean register(Player newUser)
 	{
 		
 		if(isRegistered(newUser.getEmail()))
 		{
 			
-			System.out.println("The user is already registered.");
+			return false;
 			
 		}
 		
@@ -50,7 +50,7 @@ public class UserManager
 		{
 			
 			users.add(newUser);
-			System.out.println("User succesfully registered.");
+			return true;
 			
 		}
 		
