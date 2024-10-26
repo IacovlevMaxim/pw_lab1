@@ -56,17 +56,23 @@ public class UserManager
 		
 	}
 	
-	public void modifyUser(Player user, String newName, String newSurname, LocalDate newBirhDate, String newEmail)
+	public void modifyUser(Player user, String newNameSurname, Date newBirthDate, Date newReservation, String newEmail)
 	{
 		
-		System.out.println("Modify name and surname");
-		user.setName(newName);
-		
-		System.out.println("Modify birth date");
-		user.setBirth(newBirhDate);
-		
-		System.out.println("Modify email");
-		user.setEmail(newEmail);
+		for(Player u : users)
+		{
+			
+			if(u == user)
+			{
+				
+				user.setNameSurname(newNameSurname);
+				user.setBirthDate(newBirthDate);
+				user.setReservation(newReservation);
+				user.setEmail(newEmail);
+				
+			}
+			
+		}
 		
 	}
 	
