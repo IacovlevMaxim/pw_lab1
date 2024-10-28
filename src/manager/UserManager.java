@@ -95,5 +95,15 @@ public class UserManager
 		return regUsers;
 		
 	}
+
+	//NEW
+	public Player getUser(String email) {
+            for (Player user : users) {
+                if (user.getEmail().equals(email)) {
+                    return user;
+                }
+            }
+            return null;
+        }
 	
 }
