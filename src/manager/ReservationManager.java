@@ -1,10 +1,15 @@
-package classes;
+package manager;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import classes.Court;
+import factories.Reservation;
+
+
 public class ReservationManager {
+	
     private UserManager userManager;
     private CourtManager courtManager;
     private ArrayList<Reservation> reservations;
@@ -46,7 +51,7 @@ public class ReservationManager {
      * @param userId the ID of the user
      * @return the discount percentage. Returns 10.0 for users with seniority greater than 2 years, and 0.0 otherwise.
      */
-    private float calculateDiscount(int userId) {
+    private float calculateDiscount(String userId) {
         if(userManager.getUser(userId).calculateSeniority() > 2) {
             System.out.println("The user has a 10% discount!\n");
             return 10.0f;
@@ -78,13 +83,13 @@ public class ReservationManager {
      * @param type the type of the court we want to reserve (indoor or outdoor)
      * @return {@code true} if the reservation is successfully made, and {@code false} otherwise
      */
-    public boolean makeIndividualReservation(int userId, LocalDate date, int duration, int courtId, int max_num, boolean type) {
+    public boolean makeIndividualReservation(String userId, LocalDate date, int duration, String courtId, int max_num, boolean type) {
 
         boolean found = false;
         float price, discount;
 
         //first we check if the user is registered
-        if(!userManager.isRegistered(userId)) { 
+        if(userManager.isRegistered(userId)==null) { 
             System.out.println("The user is not registered\n");
             return false;
         }
@@ -134,7 +139,7 @@ public class ReservationManager {
      * If the reservation is less than 24 hours before the start date, a message will be printed
      * and the cancellation will not proceed.
      */
-    public boolean cancelReservation(int userId, int courtId) {
+    public boolean cancelReservation(String userId, String courtId) {
         for(Reservation reservation : reservations) {
             if(reservation.getUserId().equals(userId) && reservation.getCourtId().equals(courtId)) {
                 if(!isValidReservationDate(reservation.getDate())) {
@@ -160,7 +165,7 @@ public class ReservationManager {
      * If the reservation is less than 24 hours before the start date, a message will be printed
      * and the modification will not proceed.
      */
-    public boolean modifyReservation(int userId, int courtId, LocalDate date, int duration) {
+    public boolean modifyReservation(String userId, String courtId, LocalDate date, int duration) {
 
         if(!isValidReservationDate(date)) {
             System.out.println("Reservation cannot be modified less than 24 hours before the start date\n");
@@ -205,7 +210,7 @@ public class ReservationManager {
      * @param courtId The ID of the court for which reservations are to be retrieved.
      * @return An ArrayList of Reservation objects that match the specified date and court ID.
      */
-    public ArrayList<Reservation> getReservations(LocalDate date, int courtId) {
+    public ArrayList<Reservation> getReservations(LocalDate date, String courtId) {
         ArrayList<Reservation> res = new ArrayList<>();
         for(Reservation reservation : reservations) {
             if(reservation.getDate().equals(date) && reservation.getCourtId().equals(courtId)) {
