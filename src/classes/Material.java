@@ -9,7 +9,13 @@ public class Material {
     private boolean _usage;
     private MaterialStatus _status;
 
-    // Constructor with parameters
+    /**
+     * Parameterized constructor
+     * @param id Id of the material
+     * @param type Type of material (BALL, BASKET, CONE)
+     * @param usage Usage of the material (Indoors, Outdoors)
+     * @param status Status of the material (AVAILABLE, RESERVED, BAD_CONDITION)
+     */
     public Material(Integer id, MaterialType type, boolean usage, MaterialStatus status) {
         _id = id;
         _type = type;
@@ -17,49 +23,87 @@ public class Material {
         _status = status;
     }
 
-    // Default constructor
+   /**
+    * Empty constructor
+    */
     public Material() {
 
     }
 
-    @Override
+    /**
+     * Creates a string to print the information of the material
+     * @return The string containing the information of the material
+     */
     public String toString() {
-        return "Material\nId: " + this._id +
-                "\nType: " + this._type +
-                "\nUsage: " + this._usage +
-                "\nStatus: " + this._status;
+        String aux = "Id: " + this._id +
+                "\nType: " + this._type;
+        if(this._usage==true)
+        {
+        	aux += "\nUsage: Indoors";
+        }
+        else
+        {
+        	aux +="\nUsage: Outdoors";
+        }
+        aux += "\nStatus: " + this._status;
+        return aux;
     }
 
-    // Getters
+    /**
+     * Gets the ID of the material
+     * @return The ID of the material
+     */
     public Integer getId() {
         return _id;
     }
-
+    /**
+     * Gets the type of the material
+     * @return The type of the material
+     */
     public MaterialType getType() {
         return _type;
     }
-
+    /**
+     * Gets the usage of the material
+     * @return The usage of the material
+     */
     public boolean getUsage() {
         return _usage;
     }
 
+    /**
+     * Gets the status of the material
+     * @return The status of the material
+     */
     public MaterialStatus getStatus() {
         return _status;
     }
 
-    // Setters
+    /**
+     * Sets the ID of the material
+     * @param id The new ID of the material
+     */
     public void setId(Integer id) {
         this._id = id;
     }
-
+    /**
+     * Sets the type of the material
+     * @param type New type of the material
+     */
     public void setType(MaterialType type) {
         this._type = type;
     }
-
+    /**
+     * Sets the usage of the material
+     * @param usage New usage of the material
+     */
     public void setUsage(boolean usage) {
         this._usage = usage;
     }
-
+    /**
+     * Sets the status of the material
+     * @param status New status of the material
+     */
     public void setStatus(MaterialStatus status) {
         this._status = status;
     }
