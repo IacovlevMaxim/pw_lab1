@@ -119,7 +119,8 @@ public class ReservationManager {
         discount = calculateDiscount(userId);
 
         // create reservation
-        Reservation reservation = new Reservation(userId, date, duration, courtId, price, discount); 
+        Reservation reservation = new Reservation(userId, date, duration, courtId, price, discount);
+        reservations.add(reservation);
     }
 
     
@@ -180,5 +181,37 @@ public class ReservationManager {
         System.out.println("Reservation not found\n");
         return false;
     }
+
     
+    /**
+     * Counts the number of reservations that are scheduled for a future date.
+     *
+     * @return the number of reservations with a date after the current date
+     */
+    public int numberOfReservations() {
+        int count = 0;
+        for(Reservation reservation : reservations) {
+            if(reservation.getDate().isAfter(LocalDate.now())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Retrieves a list of reservations for a specific date and court ID.
+     *
+     * @param date The date for which reservations are to be retrieved.
+     * @param courtId The ID of the court for which reservations are to be retrieved.
+     * @return An ArrayList of Reservation objects that match the specified date and court ID.
+     */
+    public ArrayList<Reservation> getReservations(LocalDate date, int courtId) {
+        ArrayList<Reservation> res = new ArrayList<>();
+        for(Reservation reservation : reservations) {
+            if(reservation.getDate().equals(date) && reservation.getCourtId().equals(courtId)) {
+                res.add(reservation);
+            }
+        }
+        return res;
+    }
 }
