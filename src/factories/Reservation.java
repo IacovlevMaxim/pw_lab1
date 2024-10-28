@@ -161,4 +161,18 @@ abstract public class Reservation {
     public int getSessionNumber() {
         return _sessionNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "userId = '" + _userId + '\'' +
+                ", date = " + _date +
+                ", duration = " + _duration +
+                " minutes, courtId = '" + _courtId + '\'' +
+                ", price = " + _price +
+                " euros, discount = " + _discount +
+                ", packageId = '" + _packageId + '\'' +
+                ", sessionNumber = " + _sessionNumber +
+                '}';
+    }
 }
