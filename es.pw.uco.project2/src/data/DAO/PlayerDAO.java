@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import business.PlayerDTO;
 import data.common.DBConnection;
 import data.common.QueriesLoader;
+import exceptions.PlayerNotFoundException;
 
 public class PlayerDAO {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 	
-	public PlayerDTO requestPlayerByEmail(String email){
+	/**
+	 * Gets a player from the database using the email
+	 * @param email Email of the user to get
+	 * @return
+	 * @throws PlayerNotFoundException
+	 */
+	public PlayerDTO requestPlayerByEmail(String email) throws PlayerNotFoundException{
 		PlayerDTO player = new PlayerDTO();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -25,9 +27,8 @@ public class PlayerDAO {
 			stmt.setString(1, email); // Set the ? in the queries file (for the first ?, replace with email)
             ResultSet rs = stmt.executeQuery();
 			
-            if(!rs.next())
-            {
-            	return null;
+            if(!rs.next()) {
+            	throw new PlayerNotFoundException("That email does not belong to any player\n");
             }
             
             String name = rs.getString("name");
@@ -47,12 +48,17 @@ public class PlayerDAO {
 		return player;
 	}
 	
+	/**
+	 * Returns all players in the database
+	 * @return The list with all the players in the database
+	 */
 	public ArrayList<PlayerDTO> requestAllPlayers(){
 		ArrayList<PlayerDTO> players = new ArrayList<PlayerDTO>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			QueriesLoader loader = new QueriesLoader();
+			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayersAllFilter"));
             ResultSet rs = stmt.executeQuery();
 			
@@ -76,5 +82,70 @@ public class PlayerDAO {
 		}
 		return players;
 	}
+	
+	/**
+	 * Add a new player
+	 * @param player Player to add
+	 */
+	public void addNewPlayer(PlayerDTO player){
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			QueriesLoader loader = new QueriesLoader();
+			
+			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("InsertNewPlayer"));
+			
+			stmt.setString(1, player.getName()); // Set the ? in the queries file (for the first ?, replace with email)
+            Date date = Date.valueOf(player.getBirth());
+			stmt.setDate(2, date);
+			date = Date.valueOf(player.getRegistration());
+			stmt.setDate(3, date);
+			stmt.setString(4, player.getEmail());
+			
+			stmt.executeUpdate();
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			
+			dbConnection.closeConnection();
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		
+		}
+	}
+	
 
+	/**
+	 * Deletes a player using the email
+	 * @param player Email of the user to delete
+	 * @throws PlayerNotFoundException
+	 */
+	public void deletePlayer(String email) throws PlayerNotFoundException {
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			QueriesLoader loader = new QueriesLoader();
+			
+			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("DeletePlayer"));
+			
+			stmt.setString(1, email);
+			int rs=stmt.executeUpdate();
+
+			if(rs==0) {
+            	throw new PlayerNotFoundException("That email does not belong to any player\n");
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		
+		}
+	}
+	
 }
