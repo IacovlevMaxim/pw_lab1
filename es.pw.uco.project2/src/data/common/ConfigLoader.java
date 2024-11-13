@@ -16,7 +16,7 @@ public class ConfigLoader {
 		properties = new Properties();
 		InputStream input;
 		try {
-            input = new FileInputStream("config.properties");
+            input = new FileInputStream("config.properties"); // SINCE IT IS NOT INSIDE /src WE USE FILEINPUTSTREAM
 			properties.load(input);
 			input.close();
 		} catch (IOException ex) {
