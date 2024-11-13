@@ -14,7 +14,7 @@ public class QueriesLoader {
 		properties = new Properties();
 		InputStream input;
 		try {
-			input =QueriesLoader.class.getClassLoader().getResourceAsStream("sql.properties");
+			input =QueriesLoader.class.getClassLoader().getResourceAsStream("sql.properties");  // SINCE IT IS INSIDE /src WE USE GETRESOURCEASSTREAM
 			properties.load(input);
 		} catch (IOException ex) {
             ex.printStackTrace();
@@ -29,4 +29,5 @@ public class QueriesLoader {
 	public String getProperty(String key) {
         return properties.getProperty(key);
     }
+	
 }
