@@ -14,7 +14,7 @@ public class QueriesLoader {
 		properties = new Properties();
 		InputStream input;
 		try {
-			input =QueriesLoader.class.getClassLoader().getResourceAsStream("queries.properties");
+			input =QueriesLoader.class.getClassLoader().getResourceAsStream("sql.properties");
 			properties.load(input);
 		} catch (IOException ex) {
             ex.printStackTrace();
