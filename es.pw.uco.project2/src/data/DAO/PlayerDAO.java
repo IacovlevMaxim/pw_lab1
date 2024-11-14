@@ -159,8 +159,13 @@ public class PlayerDAO {
 			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("ModifyPlayer"));
+
+			stmt.setString(3, player.getName()); // Set the ? in the queries file (for the first ?, replace with email)
+            Date date = Date.valueOf(player.getBirth());
+			stmt.setDate(2, date);
+			stmt.setString(1, player.getEmail());
+			stmt.setString(4, email);
 			
-			stmt.setString(1, email);
 			int rs=stmt.executeUpdate();
 
 			if(rs==0) {
