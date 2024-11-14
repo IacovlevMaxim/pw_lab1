@@ -5,19 +5,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import business.PlayerDTO;
+import business.exceptions.PlayerNotFoundException;
 import data.common.DBConnection;
 import data.common.QueriesLoader;
-import exceptions.PlayerNotFoundException;
 
 public class PlayerDAO {
+	
+	
 	
 	/**
 	 * Gets a player from the database using the email
 	 * @param email Email of the user to get
 	 * @return
-	 * @throws PlayerNotFoundException
 	 */
-	public PlayerDTO requestPlayerByEmail(String email) throws PlayerNotFoundException{
+	public PlayerDTO requestPlayerByEmail(String email){
 		PlayerDTO player = new PlayerDTO();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -28,11 +29,11 @@ public class PlayerDAO {
             ResultSet rs = stmt.executeQuery();
 			
             if(!rs.next()) {
-            	throw new PlayerNotFoundException("That email does not belong to any player\n");
+            	return null;
             }
             
-            String name = rs.getString("name");
-            LocalDate birth = rs.getDate("birth").toLocalDate();
+            String name = rs.getString("fullName");
+            LocalDate birth = rs.getDate("birthDate").toLocalDate();
             LocalDate registration = rs.getDate("registration").toLocalDate();
             player = new PlayerDTO(name, birth, registration, email);
             
@@ -60,14 +61,16 @@ public class PlayerDAO {
 			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayersAllFilter"));
+			
             ResultSet rs = stmt.executeQuery();
 			
-            while(!rs.next())
+            while(rs.next())
             {
-                String name = rs.getString("name");
-                LocalDate birth = rs.getDate("birth").toLocalDate();
+                String name = rs.getString("fullName");
+                LocalDate birth = rs.getDate("birthDate").toLocalDate();
                 LocalDate registration = rs.getDate("registration").toLocalDate();
                 String email = rs.getString("email");
+
                 players.add(new PlayerDTO(name, birth, registration, email));
             }
             
@@ -146,6 +149,34 @@ public class PlayerDAO {
 			e.printStackTrace();
 		
 		}
+	}
+	
+	
+	public boolean modifyPlayer(String email, PlayerDTO player) {
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			QueriesLoader loader = new QueriesLoader();
+			
+			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("ModifyPlayer"));
+			
+			stmt.setString(1, email);
+			int rs=stmt.executeUpdate();
+
+			if(rs==0) {
+            	return false;
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		
+		}
+		return true;
 	}
 	
 }
