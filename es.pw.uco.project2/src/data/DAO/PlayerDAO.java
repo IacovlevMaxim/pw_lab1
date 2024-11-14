@@ -9,9 +9,19 @@ import business.exceptions.PlayerNotFoundException;
 import data.common.DBConnection;
 import data.common.QueriesLoader;
 
+/**
+ * Class used to access the database of the player
+ */
 public class PlayerDAO {
 	
+	QueriesLoader loader;
 	
+	/**
+	 * Empty constructor
+	 */
+	public PlayerDAO(){
+		loader = new QueriesLoader();
+	}
 	
 	/**
 	 * Gets a player from the database using the email
@@ -23,7 +33,7 @@ public class PlayerDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			QueriesLoader loader = new QueriesLoader();
+			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayerEmailFilter"));
 			stmt.setString(1, email); // Set the ? in the queries file (for the first ?, replace with email)
             ResultSet rs = stmt.executeQuery();
@@ -58,7 +68,6 @@ public class PlayerDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayersAllFilter"));
 			
@@ -94,7 +103,6 @@ public class PlayerDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("InsertNewPlayer"));
 			
@@ -122,14 +130,13 @@ public class PlayerDAO {
 
 	/**
 	 * Deletes a player using the email
-	 * @param player Email of the user to delete
+	 * @param email Email of the user to delete
 	 * @throws PlayerNotFoundException
 	 */
 	public void deletePlayer(String email) throws PlayerNotFoundException {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("DeletePlayer"));
 			
@@ -151,12 +158,16 @@ public class PlayerDAO {
 		}
 	}
 	
-	
+	/**
+	 * Modifies a player's information
+	 * @param email Email of the player to modify
+	 * @param player New information of the player
+	 * @return true if the operation was successful, false if the player was not found
+	 */
 	public boolean modifyPlayer(String email, PlayerDTO player) {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			QueriesLoader loader = new QueriesLoader();
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("ModifyPlayer"));
 
