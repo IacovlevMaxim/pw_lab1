@@ -13,7 +13,7 @@ public class UserManagerMain {
 		String opt="1"; // OPTION FOR THE SWITCH
 		Scanner sc = new Scanner(System.in); // SCANNER TO READ THE KEYBOARD
 		// PARAMETERS FOR THE PLAYER //
-		String name, email;
+		String name, email, newEmail;
 		LocalDate birth, registration;
 		///////////////////////////////
 		UserManager uManager = new UserManager(); // USER MANAGER
@@ -39,7 +39,7 @@ public class UserManagerMain {
 					try {
 						birth = LocalDate.parse(sc.next());
 						uManager.register(name, birth, registration, email);
-						System.out.println("\nUser successfully registered.\n");
+						System.out.println("\nUser successfully registered!\n");
 					}
 					catch(DateTimeParseException e) {
 						System.out.println("\nInvalid date format. Unable to create the new player.\n");
@@ -57,12 +57,12 @@ public class UserManagerMain {
 					name=sc.next();
 					name+=sc.nextLine();
 					System.out.println("\nEmail (WARNING: It must be unique): ");
-					email = sc.next();
+					newEmail = sc.next();
 					System.out.println("\nBirthday (FORMAT: YYYY-MM-DD): ");
 					try {
 						birth = LocalDate.parse(sc.next());
-						uManager.modifyUser(email, name, birth, email);
-						System.out.println("\nUser succesifully modified\n");
+						uManager.modifyUser(email, name, birth, newEmail);
+						System.out.println("\nUser succesifully modified!");
 					}
 					catch(DateTimeParseException e) {
 						System.out.println("\nInvalid date format. Unable to create the new player\n");
@@ -92,4 +92,5 @@ public class UserManagerMain {
 		}
 		sc.close();
 	}
+
 }
