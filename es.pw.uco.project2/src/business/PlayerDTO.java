@@ -2,27 +2,32 @@ package business;
 
 import java.time.LocalDate;
 
+/**
+ * Data object of the player
+ */
 public class PlayerDTO {
 
-	private String full_name;
+	private String fullName;
 	private LocalDate birth;
 	private LocalDate registration;
 	private String email;
 	
-
+	/**
+	 * Empty constructor
+	 */
 	public PlayerDTO() {
 		
 	}
 	
 	/**
 	 * Parameterized constructor
-	 * @param full_name Full_name of the user
+	 * @param fullName Full_name of the user
 	 * @param birth
 	 * @param reservation
 	 * @param email
 	 */
-	public PlayerDTO(String full_name, LocalDate birth, LocalDate registration, String email) {
-		this.full_name = full_name;
+	public PlayerDTO(String fullName, LocalDate birth, LocalDate registration, String email) {
+		this.fullName = fullName;
 		this.birth = birth;
 		this.registration = registration;
 		this.email = email;
@@ -33,7 +38,7 @@ public class PlayerDTO {
 	 * @return The name of the player
 	 */
 	public String getName() {
-		return this.full_name;
+		return this.fullName;
 	}
 	/**
 	 * Gets the birthday of the player
@@ -61,7 +66,7 @@ public class PlayerDTO {
 	 * @param name New name of the player
 	 */
 	public void setName(String name) {
-		this.full_name = name;
+		this.fullName = name;
 	}
 	/**
 	 * Sets the birthday of the player
@@ -91,7 +96,7 @@ public class PlayerDTO {
 	 */
 	public String toString() { // DO WE NEED TO SEE IF THE VARIABLES ARE EMPTY TO PRINT THEM
 		String playerInfo;
-		String name = this.full_name.replaceAll("_", " ");
+		String name = this.fullName.replaceAll("_", " ");
 		playerInfo = "\nPlayer's name: " + name;
 		playerInfo += "\nDate of birth: " + this.birth;
 		playerInfo += "\nFirst reservation: " + this.registration;
@@ -100,7 +105,10 @@ public class PlayerDTO {
 		return playerInfo;
 	}
 	
-
+	/**
+	 * Computes the number of years the user has been registered
+	 * @return The number of years
+	 */
 	public int calculateSeniority() {
 		int seniority;
 		LocalDate ahora= LocalDate.now();
