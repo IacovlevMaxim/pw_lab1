@@ -1,7 +1,5 @@
 package business;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
