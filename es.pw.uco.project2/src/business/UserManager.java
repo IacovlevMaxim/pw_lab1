@@ -6,58 +6,63 @@ import java.util.ArrayList;
 import business.exceptions.*;
 import data.DAO.PlayerDAO;
 
+/**
+ * Class to manage the players
+ */
 public class UserManager {
 
+	private PlayerDAO playerDB; // VARIABLE TO MANAGE THE ACCESS TO THE DATABASE
+	
 	/**
 	 * Empty constructor
 	 */
 	public UserManager()
 	{
-		
+		playerDB = new PlayerDAO();
 	}
 	
 	/**
-	 * Register a new user
-	 * @param newUser User to register
-	 * @return True is the operation was successful, False if the player already exists
+	 * Registers a new user
+	 * @param name Name of the user to register
+	 * @param birth Birth of the user to register
+	 * @param registration Registration date of the user to register
+	 * @param email Email of the user to register
 	 * @throws PlayerAlreadyExistsException
 	 */
 	public void register(String name, LocalDate birth, LocalDate registration, String email) throws PlayerAlreadyExistsException {
-		PlayerDAO newPlayer = new PlayerDAO();
-		if(newPlayer.requestPlayerByEmail(email)!=null)
+		if(playerDB.requestPlayerByEmail(email)!=null)
 		{
 			throw new PlayerAlreadyExistsException("The player already exists. Unable to create new player.");
 		}
 		else
 		{
-			newPlayer.addNewPlayer(new PlayerDTO(name, birth, registration, email));
+			playerDB.addNewPlayer(new PlayerDTO(name, birth, registration, email));
 		}
 	}
 	
 	/**
 	 * Modify an user's information
-	 * @param user Player to modify
-	 * @param newNameSurname New name to set
-	 * @param newBirthDate New birthday to set
+	 * @param email Email of the player to modify
+	 * @param newName New name to set
+	 * @param newBirth New birthday to set
 	 * @param newEmail New email to set
-	 * @return True if the operation was successful, False if the new email already exists
-	 * @throws PlayerAlreadyExistsException 
+	 * @throws PlayerNotFoundException
+	 * @throws PlayerAlreadyExistsException
 	 */
 	public void modifyUser(String email, String newName, LocalDate newBirth, String newEmail) throws PlayerNotFoundException, PlayerAlreadyExistsException
 	{
-		PlayerDAO player = new PlayerDAO();
-		PlayerDTO newPlayer=player.requestPlayerByEmail(email);
-		if(newPlayer==null)
+		PlayerDTO player=playerDB.requestPlayerByEmail(email);
+		if(player==null)
 		{
 			throw new PlayerNotFoundException("The player with that email doesn`t exists. Unable to modify user.");
 		}
 		else {
-			if(player.requestPlayerByEmail(newEmail)!=null && !email.equals(newEmail)) {
+			if(playerDB.requestPlayerByEmail(newEmail)!=null && !email.equals(newEmail)) {
 				throw new PlayerAlreadyExistsException("That email already belongs to an user. Unable to modify user.");
 			}
 			else
 			{
-				player.modifyPlayer(email, new PlayerDTO(newName, newBirth, newPlayer.getRegistration(), newEmail));
+				playerDB.modifyPlayer(email, new PlayerDTO(newName, newBirth, player.getRegistration(), newEmail));
 			}
 		}
 	}
@@ -68,8 +73,7 @@ public class UserManager {
 	 */
 	public ArrayList<PlayerDTO> getPlayers()
 	{
-		PlayerDAO player = new PlayerDAO();
-		ArrayList<PlayerDTO> players = player.requestAllPlayers();
+		ArrayList<PlayerDTO> players = playerDB.requestAllPlayers();
 		return players;
 	}
 	
@@ -79,12 +83,12 @@ public class UserManager {
 	 * @return The user
 	 */
 	public PlayerDTO getPlayer(String email) {
-        PlayerDAO player = new PlayerDAO();
-        PlayerDTO newPlayer = player.requestPlayerByEmail(email);
-        if(newPlayer==null)
+        PlayerDTO player = playerDB.requestPlayerByEmail(email);
+        if(player==null)
         {
         	return null;
         }
-        return newPlayer;
+        return player;
     }
 }
+
