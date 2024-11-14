@@ -2,19 +2,28 @@ package data.common;
 
 import java.sql.*;
 
+/**
+ * Class in charge of getting the connection to the database
+ */
 public class DBConnection {
 
 	protected Connection connection = null;
-	protected String url = "jdbc:mysql://oraclepr.uco.es:3306/p42iaiam";
-	protected String user = "p42iaiam";
-	protected String password = "pw_lab2";
+	protected String url;
+	protected String user;
+	protected String password;
 	
+	/**
+	 * Tries to connect to the database
+	 * @return The connection to the database
+	 */
 	public Connection getConnection(){
-
+		ConfigLoader loader = new ConfigLoader();
 		try{
+			url = loader.getProperty("url");
+			user = loader.getProperty("user");
+			password = loader.getProperty("passwd");
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = (Connection) DriverManager.getConnection(url, user, password);
-			System.out.println("Database connection successfully opened!");
 		} 
 		catch (SQLException e) {
 			System.err.println("Connection to MySQL has failed!");
@@ -26,16 +35,17 @@ public class DBConnection {
 		return this.connection;
 	}
 	
+	/**
+	 * Closes the connection with the database
+	 */
 	public void closeConnection() {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {
 				this.connection.close();
-				System.out.println("Database connection successfully closed!");
 			}
 		} catch (SQLException e) {
 			System.err.println("Error while trying to close the connection.");
 			e.printStackTrace();
 		}
 	}
-
 }
