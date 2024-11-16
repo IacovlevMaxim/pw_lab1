@@ -90,5 +90,18 @@ public class UserManager {
         }
         return player;
     }
+	
+	/**
+	* List the existing players attributes
+	* @return The list with the players attributes
+	*/
+	public ArrayList<String> getPlayersString()
+	{
+		ArrayList<PlayerDTO> players = playerDB.requestAllPlayers();
+		ArrayList<String> playersText = new ArrayList<String>();
+		for(PlayerDTO p : players) {
+			playersText.add(p.toString());
+		}
+		return playersText;
+	}
 }
-
