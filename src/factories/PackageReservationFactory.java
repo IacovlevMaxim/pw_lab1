@@ -8,6 +8,9 @@ import exceptions.NoAdultException;
 import java.time.LocalDate;
 
 public class PackageReservationFactory implements IReservationFactory {
+    PackageReservationFactory() {
+
+    }
     @Override
     public Reservation createAdultReservation(String userId, LocalDate date, int duration, String courtId, float price, float discount, int adultNumber) {
         return null;
