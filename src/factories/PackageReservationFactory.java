@@ -8,7 +8,7 @@ import exceptions.NoAdultException;
 import java.time.LocalDate;
 
 public class PackageReservationFactory implements IReservationFactory {
-    PackageReservationFactory() {
+    public PackageReservationFactory() {
 
     }
     @Override
