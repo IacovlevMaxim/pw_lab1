@@ -11,19 +11,21 @@ public class MaterialDTO {
     private MaterialType type;
     private boolean usage;
     private MaterialStatus status;
+    private Integer courtId;
 
-    /**
+	/**
      * Parameterized constructor
      * @param id Id of the material
      * @param type Type of material (BALL, BASKET, CONE)
      * @param usage Usage of the material (Indoors, Outdoors)
      * @param status Status of the material (AVAILABLE, RESERVED, BAD_CONDITION)
      */
-    public MaterialDTO(Integer id, MaterialType type, boolean usage, MaterialStatus status) {
+    public MaterialDTO(Integer id, MaterialType type, boolean usage, MaterialStatus status, Integer courtId) {
         this.id = id;
         this.type = type;
         this.usage = usage;
         this.status = status;
+        this.courtId = courtId;
     }
     
     /**
@@ -32,18 +34,18 @@ public class MaterialDTO {
      * @param usage Usage of the material (Indoors, Outdoors)
      * @param status Status of the material (AVAILABLE, RESERVED, BAD_CONDITION)
      */
-    public MaterialDTO(MaterialType type, boolean usage, MaterialStatus status) {
+    public MaterialDTO(MaterialType type, boolean usage, MaterialStatus status, Integer courtId) {
         this.id = null; // Used when we need to save a new id in our database
         this.type = type;
         this.usage = usage;
         this.status = status;
+        this.courtId = courtId;
     }
 
    /**
     * Empty constructor
     */
     public MaterialDTO() {
-
     }
 
     /**
@@ -52,16 +54,20 @@ public class MaterialDTO {
      */
     public String toString() {
         String aux = "\nId: " + this.id +
-                "\nType: " + this.type;
+                "\nType: " + this.type.name();
         if(this.usage==true)
         {
-        	aux += "\nUsage: Indoors";
+        	aux += "\nUsage: INDOORS";
         }
         else
         {
-        	aux +="\nUsage: Outdoors";
+        	aux +="\nUsage: OUTDOORS";
         }
-        aux += "\nStatus: " + this.status;
+        aux += "\nStatus: " + this.status.name();
+        if(this.status.equals(MaterialStatus.RESERVED))
+        {
+        	aux += " TO COURT " + this.courtId;
+        }
         return aux;
     }
 
@@ -123,5 +129,19 @@ public class MaterialDTO {
     public void setStatus(MaterialStatus status) {
         this.status = status;
     }
+    /**
+     * Gets the id of the court in which it is reserved
+     * @return The id of the court
+     */
+    public int getCourtId() {
+		return courtId;
+	}
+    /**
+     * Sets the id of the court in which it is reserved
+     * @param courtId The id of the court
+     */
+	public void setCourtId(int courtId) {
+		this.courtId = courtId;
+	}
 	
 }
