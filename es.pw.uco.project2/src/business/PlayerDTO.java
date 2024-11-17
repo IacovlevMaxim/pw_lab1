@@ -3,10 +3,11 @@ package business;
 import java.time.LocalDate;
 
 /**
- * Data object of the player
+ * Data transfer object for the player
  */
 public class PlayerDTO {
 
+	private Integer id;
 	private String fullName;
 	private LocalDate birth;
 	private LocalDate registration;
@@ -27,6 +28,23 @@ public class PlayerDTO {
 	 * @param email
 	 */
 	public PlayerDTO(String fullName, LocalDate birth, LocalDate registration, String email) {
+		this.id = null;
+		this.fullName = fullName;
+		this.birth = birth;
+		this.registration = registration;
+		this.email = email;
+	}
+	
+	/**
+	 * Parameterized constructor
+	 * @param id Id of the player
+	 * @param fullName Full_name of the user
+	 * @param birth
+	 * @param reservation
+	 * @param email
+	 */
+	public PlayerDTO(Integer id, String fullName, LocalDate birth, LocalDate registration, String email) {
+		this.id = id;
 		this.fullName = fullName;
 		this.birth = birth;
 		this.registration = registration;
@@ -96,8 +114,8 @@ public class PlayerDTO {
 	 */
 	public String toString() { // DO WE NEED TO SEE IF THE VARIABLES ARE EMPTY TO PRINT THEM
 		String playerInfo;
-		String name = this.fullName.replaceAll("_", " ");
-		playerInfo = "\nPlayer's name: " + name;
+		playerInfo = "\nPlayer's ID: " + this.id;
+		playerInfo += "\nPlayer's name: " + fullName;
 		playerInfo += "\nDate of birth: " + this.birth;
 		playerInfo += "\nFirst reservation: " + this.registration;
 		playerInfo += "\nEmail addres: " + this.email;
