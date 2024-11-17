@@ -77,7 +77,7 @@ public class UserManagerMain {
 					
 				case "3":
 					System.out.println("\n--- USERS ---");
-					for(String s : uManager.getPlayersString())
+					for(String s : uManager.getPlayersString(uManager.getPlayers()))
 					{
 						System.out.println(s);
 					}
@@ -91,7 +91,6 @@ public class UserManagerMain {
 					break;
 			}
 		}
-		sc.close();
 	}
 
 }
