@@ -1,16 +1,15 @@
 package business.exceptions;
 
-public class CourtNotFoundException extends Exception{
-	
+public class CourtAlreadyExistsException extends Exception {
 	/**
 	 * Empty constructor
 	 */
-	public CourtNotFoundException() {}
+	public CourtAlreadyExistsException() {}
 	/**
 	 * Sends a message
 	 * @param error The message to send
 	 */
-	public CourtNotFoundException(String err)
+	public CourtAlreadyExistsException(String err)
 	{
 		
 		super(err);

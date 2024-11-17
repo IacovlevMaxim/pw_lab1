@@ -11,7 +11,7 @@ import data.DAO.PlayerDAO;
  */
 public class UserManager {
 
-	private PlayerDAO playerDB; // VARIABLE TO MANAGE THE ACCESS TO THE DATABASE
+	private PlayerDAO playerDB;
 	
 	/**
 	 * Empty constructor
@@ -92,12 +92,12 @@ public class UserManager {
     }
 	
 	/**
-	* List the existing players attributes
-	* @return The list with the players attributes
-	*/
-	public ArrayList<String> getPlayersString()
+	 * List of to string methods for a list of players
+	 * @param courts The list of players to get the to string methods from
+	 * @return The list of strings
+	 */
+	public ArrayList<String> getPlayersString(ArrayList<PlayerDTO> players)
 	{
-		ArrayList<PlayerDTO> players = playerDB.requestAllPlayers();
 		ArrayList<String> playersText = new ArrayList<String>();
 		for(PlayerDTO p : players) {
 			playersText.add(p.toString());
