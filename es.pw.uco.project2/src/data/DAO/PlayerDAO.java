@@ -10,7 +10,7 @@ import data.common.DBConnection;
 import data.common.QueriesLoader;
 
 /**
- * Class used to access the database of the player
+ * Data access object for the player
  */
 public class PlayerDAO {
 	
@@ -26,7 +26,7 @@ public class PlayerDAO {
 	/**
 	 * Gets a player from the database using the email
 	 * @param email Email of the user to get
-	 * @return
+	 * @return The user if it exists, null if it doesn't
 	 */
 	public PlayerDTO requestPlayerByEmail(String email){
 		PlayerDTO player = new PlayerDTO();
@@ -42,10 +42,48 @@ public class PlayerDAO {
             	return null;
             }
             
+            Integer id = rs.getInt("id");
             String name = rs.getString("fullName");
             LocalDate birth = rs.getDate("birthDate").toLocalDate();
             LocalDate registration = rs.getDate("registration").toLocalDate();
-            player = new PlayerDTO(name, birth, registration, email);
+            player = new PlayerDTO(id, name, birth, registration, email);
+            
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return player;
+	}
+	
+	/**
+	 * Gets a player from the database using the id
+	 * @param id Id of the user to get
+	 * @return The user if it exists, null if it doesn't
+	 */
+	public PlayerDTO requestPlayerById(Integer id){
+		PlayerDTO player = new PlayerDTO();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayerIdFilter"));
+			stmt.setInt(1, id); 
+            ResultSet rs = stmt.executeQuery();
+			
+            if(!rs.next()) {
+            	return null;
+            }
+  
+            String name = rs.getString("fullName");
+            String email = rs.getString("email");
+            LocalDate birth = rs.getDate("birthDate").toLocalDate();
+            LocalDate registration = rs.getDate("registration").toLocalDate();
+            player = new PlayerDTO(id, name, birth, registration, email);
             
 			if (stmt != null){ 
 				stmt.close(); 
@@ -75,12 +113,13 @@ public class PlayerDAO {
 			
             while(rs.next())
             {
+                Integer id = rs.getInt("id");
                 String name = rs.getString("fullName");
                 LocalDate birth = rs.getDate("birthDate").toLocalDate();
                 LocalDate registration = rs.getDate("registration").toLocalDate();
                 String email = rs.getString("email");
 
-                players.add(new PlayerDTO(name, birth, registration, email));
+                players.add(new PlayerDTO(id, name, birth, registration, email));
             }
             
 			if (stmt != null){ 
@@ -106,7 +145,7 @@ public class PlayerDAO {
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("InsertNewPlayer"));
 			
-			stmt.setString(1, player.getName()); // Set the ? in the queries file (for the first ?, replace with email)
+			stmt.setString(1, player.getName()); 
             Date date = Date.valueOf(player.getBirth());
 			stmt.setDate(2, date);
 			date = Date.valueOf(player.getRegistration());
@@ -127,7 +166,6 @@ public class PlayerDAO {
 		}
 	}
 	
-
 	/**
 	 * Deletes a player using the email
 	 * @param email Email of the user to delete
@@ -171,7 +209,7 @@ public class PlayerDAO {
 			
 			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("ModifyPlayer"));
 
-			stmt.setString(3, player.getName()); // Set the ? in the queries file (for the first ?, replace with email)
+			stmt.setString(3, player.getName()); 
             Date date = Date.valueOf(player.getBirth());
 			stmt.setDate(2, date);
 			stmt.setString(1, player.getEmail());
