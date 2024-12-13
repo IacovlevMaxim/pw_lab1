@@ -13,14 +13,14 @@
 <% // IF WE ARE HERE, WE LOG OUT THE USER NO MATTER WHERE THEY COME FROM 
 %>
 
-WELCOME TO BASKET OF COURTS, WHAT DO YOU WANT TO DO? 
+| WELCOME TO BASKET OF COURTS, WHAT DO YOU WANT TO DO? |
 <br/><br/>
 
-<jsp:setProperty property="emailUser" value="" name="customerBean"/>
+<jsp:setProperty property="email" value="" name="customerBean"/>
 <jsp:setProperty property="password" value="" name="customerBean"/>
-<a href="/JSPMVC/mvc/controller/loginController.jsp">Log in</a>
+<a href="/FinalProject/src/main/webapp/mvc/controller/loginController.jsp">Log in</a>
 <br/>
-<a href="/JSPMVC/mvc/controller/registerController.jsp">Register</a>
+<a href="/FinalProject/src/main/webapp/mvc/controller/registerController.jsp">Register</a>
 
 </body>
 </html>
