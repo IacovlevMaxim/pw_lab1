@@ -1,4 +1,4 @@
-package data.DAO;
+package data.DAO; // ACTUALIZAAAAAAAAAAAAAR
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -231,6 +231,39 @@ public class PlayerDAO {
 		
 		}
 		return true;
+	}
+	
+	/**
+	 * Gets the ID of a player
+	 * @param email The email of the player
+	 * @return The ID of the player
+	 */
+	public Integer getPlayerId(String email){
+		Integer id=null;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement(loader.getProperty("PlayerEmailFilter"));
+			stmt.setString(1, email); // Set the ? in the queries file (for the first ?, replace with email)
+            ResultSet rs = stmt.executeQuery();
+			
+            if(!rs.next()) {
+            	return null;
+            }
+            
+            id = rs.getInt("id");
+            
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 }
