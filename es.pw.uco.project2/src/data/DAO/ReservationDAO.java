@@ -187,6 +187,65 @@ public class ReservationDAO {
     }
 
     /**
+     * Gets the next reservation made by the user ID
+     * @param userId ID of the user who made the reservation
+     * @return The next reservation
+     */
+    public Reservation getNextReservationByUserId(Integer userId) {
+    	Reservation reservation = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(loader.getProperty("findNearestReservation"));
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(!rs.next()) {
+            	return null;
+            }
+
+            reservation=_reservationFromDb(rs);
+
+            stmt.close();
+
+            rs.close();
+
+        } catch (Exception e){
+            System.err.println(e);
+            e.printStackTrace();
+        }
+        return reservation;
+    }
+    
+    /**
+     * Gets the first reservation made by the user ID
+     * @param userId ID of the user who made the reservation
+     * @return The user's first reservation
+     */
+    public Reservation getFirstReservationByUserId(Integer userId) {
+    	Reservation reservation = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(loader.getProperty("findFirstReservation"));
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if(!rs.next()) {
+            	return null;
+            }
+
+            reservation=_reservationFromDb(rs);
+
+            stmt.close();
+
+            rs.close();
+
+        } catch (Exception e){
+            System.err.println(e);
+            e.printStackTrace();
+        }
+        return reservation;
+    }
+
+    
+    /**
      * Inserts a new adult reservation into the database.
      *
      * @param reservation the {@code AdultReservationDTO} containing the reservation details
