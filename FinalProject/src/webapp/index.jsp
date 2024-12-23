@@ -12,8 +12,8 @@
             <h2>Welcome to Basket of Courts</h2>
             <p>What do you want to do?</p>
 
-            <button onclick="location.href='./mvc/view/LoginView.jsp';">Log In</button>
-            <button onclick="location.href='./mvc/view/RegisterView.jsp';">Register</button>
+            <button onclick="location.href='/FinalProject/src/main/webapp/mvc/controller/loginController.jsp';">Log In</button>
+            <button onclick="location.href='/FinalProject/src/main/webapp/mvc/controller/registerController.jsp';">Register</button>
         </div>
     </body>
 </html>
