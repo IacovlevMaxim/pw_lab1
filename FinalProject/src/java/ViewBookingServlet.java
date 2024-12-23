@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.RequestDispatcher;
 
 import java.io.IOException;
-import java.util.list;
+import java.util.List;
+import java.util.ArrayList;
 
 import data.DAO.ReservationDAO;
+import business.factories.Reservation;
 
 
 /**
@@ -37,7 +39,7 @@ public class ViewBookingServlet extends HttpServlet {
 			request.setAttribute("completedReservations", completedReservations);
 			request.setAttribute("futureReservations", futureReservations);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/BookingView.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/BookingView.jsp");
 			
 			dispatcher.forward(request, response);
 			
@@ -46,6 +48,7 @@ public class ViewBookingServlet extends HttpServlet {
 		catch (Exception e)
 		{
 			
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			
 		}
