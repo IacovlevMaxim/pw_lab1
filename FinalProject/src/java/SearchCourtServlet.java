@@ -36,7 +36,7 @@ public class SearchCourtServlet extends HttpServlet
 		java.sql.Date date = java.sql.Date.valueOf(searchDate);
 		boolean ct = courtType.equals("Indoor");
 		
-		CourtManager cm = new CourtManager();
+		CourtDAO cm = new CourtDAO();
 		List<CourtDAO> courts = cm.requestAvailableCourtsByTypeAndDate(ct, date);
 		
 		if(courts == null || courts.isEmpty())
