@@ -47,14 +47,26 @@
     <fieldset style="margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
       <legend>Reservation <%= i %></legend>
 
+	  <label for="userId" style="display: block; text-align: left; margin: 10px 0 5px;">User ID</label>
+      <input type="text" id="userId" name="familyReservation[userId]" placeholder="Enter User ID" required>
+
       <!-- Date -->
       <label for="date<%= i %>" style="display: block; text-align: left; margin: 10px 0 5px;">Date</label>
       <input type="date" id="date<%= i %>" name="reservation[<%= i %>][date]" required>
+      
+      <label for="expDate<%= i %>" style="display: block; text-align: left; margin: 10px 0 5px;">Date</label>
+      <input type="date" id="expDate<%= i %>" name="reservation[<%= i %>][expDate]" required>
 
       <!-- Duration -->
       <label for="duration<%= i %>" style="display: block; text-align: left; margin: 10px 0 5px;">Duration (Hours)</label>
       <input type="number" id="duration<%= i %>" name="reservation[<%= i %>][duration]" min="1" required>
 
+      <label for="courtId" style="display: block; text-align: left; margin: 10px 0 5px;">Court ID</label>
+      <input type="text" id="courtId" name="familyReservation[courtId]" placeholder="Enter Court ID" required>
+     
+      <label for="price" style="display: block; text-align: left; margin: 10px 0 5px;">Price</label>
+      <input type="number" id="price" name="familyReservation[price]" min="0" step="0.01" placeholder="Enter Price" required>
+     
       <!-- Number of Adults -->
       <label for="adults<%= i %>" style="display: block; text-align: left; margin: 10px 0 5px;">Number of Adults</label>
       <input type="number" id="adults<%= i %>" name="reservation[<%= i %>][adults]" min="0" required>
