@@ -3,6 +3,8 @@ pacakge servlet;
 import data.DAO.CourtDAO;
 import business.CourtManager;
 import business.enums.CourtSize;
+import business.AdultReservationDTO;
+import data.DAO.ReservationDAO;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -50,10 +52,12 @@ public class IndividualBookingServlet extends HttpServlet
         String courtType = request.getParameter("courtType");
         String courtName = request.getParameter("courtName");
         String courtSize = request.getParameter("courtSize");
+        String courtId = request.getParameter("courtId");
+        float price = Float.parseFloat(request.getParameter("price"));
+        String userId = request.getParameter("userId");
+        int duration = Integer.parseInt(request.getParameter("duration"));
 		
-	
-		
-		if(bookingDate == null || courtType == null || courtName == null || numParticipants <= 0 || courtSize == null) 
+		if(bookingDate == null || courtType == null || courtName == null || numParticipants <= 0 || courtSize == null || courtId == null || price < 0.0 || userId == null) 
 		{
 			
 	        request.setAttribute("message", "Invalid data. Please try again.");
@@ -91,7 +95,12 @@ public class IndividualBookingServlet extends HttpServlet
 			
 		}
 		
+		java.sql.Date date = java.sql.Date.valueOf(bookingDate);
+		
 		c.reserveCourtByName(courtName);
+		AdultReservationDTO a = new AdultReservationDTO(userId, date, duration, courtId, price, numParticipants);
+		
+		boolean success = insertReservation(a);
 		
 		request.getRequestDispatcher("/mvc/view/IndividualBookingView.jsp").forward(request, response);
 		

@@ -32,8 +32,13 @@
   %>
 
   <form action="../controller/IndividualBookingController.jsp" method="post">
+    <input type="hidden" name="userId" value="<%= session.getAttribute("userId") %>">
+
     <label for="bookingDate" style="display: block; text-align: left; margin: 10px 0 5px;">Date</label>
     <input type="date" id="bookingDate" name="bookingDate" required>
+
+	<label for="duration" style="display: block; text-align: left; margin: 10px 0 5px;">Duration (hours)</label>
+    <input type="number" id="duration" name="duration" min="1" required>
 
     <label for="numParticipants" style="display: block; text-align: left; margin: 10px 0 5px;">Number of Participants</label>
     <input type="number" id="numParticipants" name="numParticipants" min="1" required>
@@ -63,6 +68,9 @@
     <%
       }
     %>
+    
+	<label for="price" style="display: block; text-align: left; margin: 10px 0 5px;">Price (€)</label>
+    <input type="number" id="price" name="price" step="0.01" min="0" required>  
 
     <button type="submit" <%= (availableCourts == null || availableCourts.isEmpty()) ? "disabled" : "" %>>Book Now</button>
   </form>
