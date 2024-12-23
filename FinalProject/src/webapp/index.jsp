@@ -1,26 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:useBean  id="customerBean" scope="session" class="display.CustomerBean"></jsp:useBean>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Index page</title>
-</head>
-<body>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Index Page</title>
+        <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    </head>
+    <body>
 
-<% // IF WE ARE HERE, WE LOG OUT THE USER NO MATTER WHERE THEY COME FROM 
-%>
+        <div class="form-container">
+            <h2>Welcome to Basket of Courts</h2>
+            <p>What do you want to do?</p>
 
-| WELCOME TO BASKET OF COURTS, WHAT DO YOU WANT TO DO? |
-<br/><br/>
-
-<jsp:setProperty property="email" value="" name="customerBean"/>
-<jsp:setProperty property="password" value="" name="customerBean"/>
-<a href="/FinalProject/src/main/webapp/mvc/controller/loginController.jsp">Log in</a>
-<br/>
-<a href="/FinalProject/src/main/webapp/mvc/controller/registerController.jsp">Register</a>
-
-</body>
+            <button onclick="location.href='./mvc/view/LoginView.jsp';">Log In</button>
+            <button onclick="location.href='./mvc/view/RegisterView.jsp';">Register</button>
+        </div>
+    </body>
 </html>
