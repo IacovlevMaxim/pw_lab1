@@ -416,6 +416,47 @@ public class CourtDAO {
 			return courts;
 			
 		}
+
+		public ArrayList<CourtDTO> requestAvailableCourtsByTypeAndDate(boolean courtType, String date)
+		{
+		    ArrayList<CourtDTO> courts = new ArrayList<CourtDTO>();
+		    
+		    try 
+		    {
+		        DBConnection dbc = new DBConnection();
+		        Connection connection = dbc.getConnection();
+		        
+		        PreparedStatement stmt = connection.prepareStatement(loader.getProperty("CourtsAvailableByTypeAndDateFilter"));
+		        stmt.setBoolean(1, courtType);  // Set the type of the court (boolean)
+		        stmt.setString(2, date);         // Set the reservation date
+		        
+		        ResultSet rs = stmt.executeQuery();
+		        
+		        while(rs.next())
+		        {
+		            int id = rs.getInt("id");
+		            String name = rs.getString("name");
+		            boolean status = rs.getBoolean("status");
+		            boolean type = rs.getBoolean("type");
+		            CourtSize size = CourtSize.valueOf(rs.getString("size"));
+		            int maxNum = rs.getInt("max_players");
+		
+		            courts.add(new CourtDTO(id, name, status, type, size, maxNum));
+		        }
+		        
+		        if (stmt != null) {stmt.close();}
+		        dbc.closeConnection();
+		    
+		    }
+		    catch (Exception e)
+		    {
+		        System.err.println(e);
+		        e.printStackTrace();
+		    }
+		    
+		    return courts;
+		}
+	
 	}
 
 
