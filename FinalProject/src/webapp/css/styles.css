@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,55 +8,83 @@ body {
     height: 100vh;
     background-color: #f4f4f9;
 }
+
 .form-container {
-    width: 300px;
-    padding: 20px;
+    width: 350px;
+    padding: 25px;
     background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-.form-container h2 {
-    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     text-align: center;
+    box-sizing: border-box;
 }
+
+.form-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .form-container input {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
+
+.form-container input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
 .form-container button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 12px;
     background-color: #007bff;
     border: none;
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
 .form-container button:hover {
     background-color: #0056b3;
 }
+
 .form-container .link {
-    text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-.form-container p {
+.form-container .link a {
+    text-decoration: none;
+    color: #007bff;
     font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
+}
+
+.form-container .link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 .booking-card {
     margin: 10px 0;
-    padding: 15px;
+    padding: 20px;
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-card p {
@@ -67,7 +95,7 @@ body {
 
 h3 {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 20px;
     color: #007bff;
     border-bottom: 2px solid #007bff;
     padding-bottom: 5px;
@@ -75,28 +103,21 @@ h3 {
 
 select, .error-message {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
 }
 
 fieldset {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
 legend {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
